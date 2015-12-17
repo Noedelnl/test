@@ -1,10 +1,14 @@
 package ss.week6.cards;
 
 import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -70,30 +74,67 @@ public class Card
 	 * @param printwriter to send the string representation to.
 	 */
 	public void write(PrintWriter pw) {
-		pw.println(this.toString());
-		pw.flush();
+			pw.println(this.toString());
+			pw.flush();
+	}
+	
+	public void write(DataOutput out) {
+		try {
+			out.writeChar(this.getSuit());
+			out.writeChar(this.getRank());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void write(ObjectOutput obj) {
+		try {
+		obj.writeObject(this);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static Card read(BufferedReader in) throws EOFException {
 		char suit;
 		char rank;
+		Card card = null;
 		try {
 			Scanner sc = new Scanner(in.readLine());
 			suit = (sc.next().toCharArray())[0];
-			rank = (sc.next().toCharArray())[0];
+			rank = (sc.next().toUpperCase().toCharArray())[0];
 			sc.close();
 			if (isValidSuit(suit) && isValidRank(rank)){
-				Card card = new Card(suit, rank);
-				throw new EOFException();
-				return card;
-			}
-			else {
-				return null;
+				card = new Card(suit, rank);
 			}
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		return card;
+	}
+	
+	public static Card read(DataInput in) throws EOFException {
+		char suit;
+		char rank;
+		Card card = null;
+		try {
+			suit = in.readChar();
+			rank = in.readChar();
+			if (isValidSuit(suit) && isValidRank(rank)){
+				card = new Card(suit, rank);
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return card;
+	}
+	
+	public static Card read(ObjectInput in) throws ClassNotFoundException, IOException {
+			return (Card) in.readObject();
 	}
 	
 	/**

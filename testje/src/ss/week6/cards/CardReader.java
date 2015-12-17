@@ -29,7 +29,7 @@ public class CardReader {
 		if (reader != null) {
 			return Card.read(reader);
 		} else if (dataIn != null) {
-			return Card.read(dataIn);
+		 return Card.read(dataIn);
 		} else {
 			return Card.read(objectIn);
 		}

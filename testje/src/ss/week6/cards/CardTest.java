@@ -64,9 +64,10 @@ public class CardTest {
         }
     }
 
-    /** Test for writing and reading a card with object files.*/
+    /** Test for writing and reading a card with object files.
+     * @throws ClassNotFoundException */
     @Test
-    public void testReadingWritingObject() {
+    public void testReadingWritingObject() throws ClassNotFoundException {
         try {
             ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(PATH + "card.obj"));
             card.write(objectOut);
