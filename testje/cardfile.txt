@@ -1,0 +1,8 @@
+Diamonds 2
+Clubs 10
+Spades jack
+Hearts 8
+Diamonds 2
+Clubs 10
+Spades jack
+Hearts 8
