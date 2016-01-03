@@ -7,12 +7,14 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Card
+public class Card implements Serializable
 {
 
 	// ---- constants -----------------------------------
@@ -93,7 +95,7 @@ public class Card
 		obj.writeObject(this);
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
