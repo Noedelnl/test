@@ -21,16 +21,12 @@ public class DictionaryAttackTest {
     private DictionaryAttack dictionaryAttack;
 
     /** Path to the text file */
-    private static final String PATH = ""; //Your path to the test folder
+    private static final String PATH = "/home/noel/GitHub/test/testje/src/ss/week6/test/"; //Your path to the test folder
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         dictionaryAttack = new DictionaryAttack();
-        try {
-            dictionaryAttack.readPasswords(PATH + "LeakedPasswords.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        dictionaryAttack.readPasswords(PATH + "LeakedPasswords.txt");
     }
 
     /**

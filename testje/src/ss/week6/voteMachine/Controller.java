@@ -1,6 +1,9 @@
 package ss.week6.voteMachine;
 
-public class Controller {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Controller implements ActionListener {
 	private static PartyList<String> parties;
 	private static VoteList votes;
 	
