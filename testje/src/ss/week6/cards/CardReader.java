@@ -25,7 +25,13 @@ public class CardReader {
 	private static ObjectInputStream objectIn;
 	private static ObjectOutputStream objectOut;
 
-	private static Card read() throws EOFException {
+	/**
+	 * Read method to read card using writer/data/objectInputstream.
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	private static Card read() throws ClassNotFoundException, IOException {
 		if (reader != null) {
 			return Card.read(reader);
 		} else if (dataIn != null) {
@@ -35,6 +41,11 @@ public class CardReader {
 		}
 	}
 
+	/**
+	 * Write method to write card using writer/data/objectOutputstream.
+	 * @param k
+	 * @throws IOException
+	 */
 	private static void write(Card k) throws IOException {
 		if (writer != null) {
 			k.write(writer);
@@ -45,6 +56,9 @@ public class CardReader {
 		}
 	}
 
+	/**
+	 * Method to close reader/object/dataInputstream.
+	 */
 	private static void close() {
 		try {
 			if (reader != null) {
@@ -67,8 +81,13 @@ public class CardReader {
 		} catch (IOException exc) {
 		}
 	}
-
-	public static void main(String[] args) {
+	
+	/**
+	 * Main method to read/write cards.
+	 * @param args
+	 * @throws ClassNotFoundException
+	 */
+	public static void main(String[] args) throws ClassNotFoundException {
 		if (args.length != 2) {
 			System.err.println("Usage: java CardReader "
 					+ "[<filename>|-] [<filename>|-]");

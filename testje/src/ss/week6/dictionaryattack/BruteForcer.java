@@ -7,11 +7,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Class to bruteforce a password given a password file consisting of usernames and md5 hashes.
+ * @author n
+ *
+ */
 public class BruteForcer {
 	private Map<String, String> passwordMap;
 	private String choices = "0123456789abcdefghijklmnopqrstuvwxyz";
-
+	
+	/**
+	 * Method to readPasswords to a Hashmap from a given file.
+	 * @param filename
+	 */
 	public void readPasswords(String filename) {
 		passwordMap = new HashMap<String, String>();
 		try {
@@ -31,6 +39,11 @@ public class BruteForcer {
 		}
 	}
 	
+	/**
+	 * Method to convert a password to its md5 Hash.
+	 * @param password
+	 * @return
+	 */
 	public String getPasswordHash(String password) {
 		try {
 			byte[] buffer = password.getBytes();
@@ -55,6 +68,14 @@ public class BruteForcer {
 		}
 		return null;
 	}
+	
+	/**
+	 * Method to crack md5 hashed passwords if certain length.
+	 * @param user
+	 * @param pos
+	 * @param length of password
+	 * @param temp
+	 */
 	public void crackRecursive(String user, int pos, int length, String temp) {
 		if (pos < length) {
 			for (int i = 0; i < choices.length(); i++) {
@@ -68,6 +89,11 @@ public class BruteForcer {
 		}
 	}
 	
+	/**
+	 * Method to crack password of length 4.
+	 * @param user
+	 * @return
+	 */
 	public String crackPassword(String user) {
 		if (passwordMap.get(user) == null) {
 			return "No such user";
@@ -89,9 +115,14 @@ public class BruteForcer {
 		}
 		return "password not found";
 	}
+	
+	/**
+	 * Main method to bruteforce Alice's password using crackRecursive.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		BruteForcer brute = new BruteForcer();
-		brute.readPasswords("/home/noel/GitHub/test/testje/src/ss/week6/test/LeakedPasswords.txt");
+		brute.readPasswords("/home/n/GitHub/test/testje/src/ss/week6/test/LeakedPasswords.txt");
 		brute.crackRecursive("alice", 0, 4, "");
 	}
 }

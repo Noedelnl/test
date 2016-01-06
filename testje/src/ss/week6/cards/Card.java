@@ -14,6 +14,11 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * Class to identify cards and read/write them.
+ * @author n
+ *
+ */
 public class Card implements Serializable
 {
 
@@ -80,6 +85,10 @@ public class Card implements Serializable
 			pw.flush();
 	}
 	
+	/**
+	 * Writes Card to file as characters.
+	 * @param out
+	 */
 	public void write(DataOutput out) {
 		try {
 			out.writeChar(this.getSuit());
@@ -90,6 +99,10 @@ public class Card implements Serializable
 		}
 	}
 	
+	/**
+	 * Writes card object to file.
+	 * @param obj
+	 */
 	public void write(ObjectOutput obj) {
 		try {
 		obj.writeObject(this);
@@ -99,6 +112,12 @@ public class Card implements Serializable
 		}
 	}
 	
+	/**
+	 * Reads card from command.
+	 * @param in
+	 * @return
+	 * @throws EOFException
+	 */
 	public static Card read(BufferedReader in) throws EOFException {
 		char suit;
 		char rank;
@@ -118,6 +137,12 @@ public class Card implements Serializable
 		return card;
 	}
 	
+	/**
+	 * Reads card from file as chars.
+	 * @param Card file in
+	 * @return Card object card
+	 * @throws EOFException
+	 */
 	public static Card read(DataInput in) throws EOFException {
 		char suit;
 		char rank;
@@ -135,6 +160,13 @@ public class Card implements Serializable
 		return card;
 	}
 	
+	/**
+	 * Reads card from file as object.
+	 * @param Card Object in
+	 * @return Card object
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public static Card read(ObjectInput in) throws ClassNotFoundException, IOException {
 			return (Card) in.readObject();
 	}

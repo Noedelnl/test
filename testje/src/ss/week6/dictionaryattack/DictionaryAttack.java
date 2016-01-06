@@ -28,13 +28,12 @@ public class DictionaryAttack {
 		passwordMap = new HashMap<String, String>();
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
-			String line = reader.readLine();
-			while (line != null) {
+			String line;
+			while ((line = reader.readLine()) != null) {
 				String[] content = line.split(":");
 				content[0] = content[0].trim();
 				content[1] = content[1].trim();
 				passwordMap.put(content[0], content[1]);
-				line = reader.readLine();
 			}
 			reader.close();
 		}
@@ -81,14 +80,7 @@ public class DictionaryAttack {
 	 * @return whether the password for that user was correct.
 	 */
 	public boolean checkPassword(String user, String password) {
-        if (passwordMap.containsKey(user)) {
-        	System.out.println(passwordMap.get(user));
-        	System.out.println(getPasswordHash(password));
-        	if (passwordMap.get(user).equals(getPasswordHash(password))) {
-        		return true;
-        	}
-        }
-		return false;
+		return passwordMap.containsKey(user) && passwordMap.get(user).equals(getPasswordHash(password));
 	}
 
 	/**
@@ -126,6 +118,10 @@ public class DictionaryAttack {
 			}
 		}
 	}
+	/**
+	 * Main method starting a dictionary attack.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		DictionaryAttack da = new DictionaryAttack();
 		da.addToHashDictionary("/home/noel/GitHub/test/testje/src/ss/week6/test/passwords.txt");
